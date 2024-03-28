@@ -18,7 +18,7 @@ function App() {
        <button onClick={()=>dispatch(increment())}>Increment</button>
        <button onClick={()=>dispatch(decrement())}>Decrement</button>
        <button onClick={()=>dispatch(incrementByVal(3))}>Increment by 3</button>
-       <p>Books: {book}</p>
+       <p>Books: {books}</p>
       </header>
     </div>
   );
