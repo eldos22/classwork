@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
+    carts: [],
     books: [
     {id:1, name:'Азбука'},
     {id:2, name:'1984'},
@@ -8,15 +10,31 @@ const initialState = {
 }
 
 const bookSlice = createSlice ({
-    name: 'book',
+    name: 'books',
     initialState,
     reducers:{
-        deleteBook: (state) => {
-            state.book +=1;
+        sortedBooks: (state, {payLoad}) => {
+            switch (payLoad) {
+                case 'low':
+                    state.books.sort((a,b) => a.id - b.id)
+                    break;
+                case "high":
+                    state.books.sort((a,b) => b.id - a.id)
+                    break;
+            }
+        },
+        deleteBook: (state, action) => {
+            state.books = state.books.filter(book => book.id !== action.payload)
+        },
+        addBook: (state, action) => {
+            state.books.push(action.payload)
+        },
+        addCart: (state, action) => {
+            state.carts(action.payload)
         }
     }
 })
 
-export const {deleteBook} = bookSlice.actions;
+export const {sortedBooks, deleteBook, addBook, addCart} = bookSlice.actions;
 
 export default bookSlice.reducer
